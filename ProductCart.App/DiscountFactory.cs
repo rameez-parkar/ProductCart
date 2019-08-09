@@ -12,8 +12,6 @@ namespace ProductCart.App
                     return new FixedDiscount();
                 case "CATEGORYWISE":
                     return new CategoryDiscount();
-                case "NONE":
-                    return new NoDiscount();
                 default:
                     throw new InvalidOperationException();
             }

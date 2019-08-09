@@ -40,12 +40,6 @@ namespace ProductCart.App
             return _cart.GetTotalCartPrice();
         }
 
-        public void ApplyDiscount()
-        {
-            string discountType = "NONE";
-            _discount.ApplyDiscount(discountType, _cart);
-        }
-
         public void ApplyDiscount(string discountType)
         {
             _discount.ApplyDiscount(discountType, _cart);

@@ -7,7 +7,7 @@ namespace ProductCart.App
         private DiscountFactory _discountFactory = new DiscountFactory();
         private DiscountTask _discountTask;
         private bool isDiscountApplied = false;
-        private double _discountedAmount;
+        private double _discountedAmount = 0;
 
         public void ApplyDiscount(string discountType, Cart cart)
         {
@@ -16,10 +16,6 @@ namespace ProductCart.App
                 _discountTask = new DiscountTask(_discountFactory.GetDiscount(discountType));
                 isDiscountApplied = true;
                 _discountedAmount = _discountTask.GetDiscount(cart);
-            }
-            else
-            {
-                _discountedAmount = 0;
             }
         }
 

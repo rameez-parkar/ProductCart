@@ -184,8 +184,6 @@ namespace ProductCart.Test
             customer.AddProductToCart(sugar, 2);
             customer.AddProductToCart(pen, 3);
 
-            customer.ApplyDiscount();
-
             var expected = 0;
             var actual = customer.GetDiscountPrice();
 
@@ -277,9 +275,39 @@ namespace ProductCart.Test
             customer.AddProductToCart(sugar, 2);
             customer.AddProductToCart(pen, 3);
 
-            customer.ApplyDiscount();
-
             var expected = 290.5;
+            var actual = customer.GetFinalPriceAfterDiscount();
+
+            Assert.Equal(expected, actual, 2);
+        }
+
+        [Fact]
+        public void Trying_To_Apply_Multiple_Discounts()
+        {
+            Product milk, notebook, sugar, pen;
+            Store store = new Store();
+
+            milk = new Product("Milk", 22.00, Category.Dairy);
+            notebook = new Product("Notebook", 40.00, Category.Educational);
+            sugar = new Product("Sugar", 35.25, Category.Grocery);
+            pen = new Product("Pen", 10.00, Category.Educational);
+            store.AddProductToList(milk);
+            store.AddProductToList(notebook);
+            store.AddProductToList(sugar);
+            store.AddProductToList(pen);
+
+            Customer customer = new Customer();
+            customer.AddProductToCart(milk, 3);
+            customer.AddProductToCart(notebook, 1);
+            customer.AddProductToCart(milk, 2);
+            customer.AddProductToCart(notebook, 1);
+            customer.AddProductToCart(sugar, 2);
+            customer.AddProductToCart(pen, 3);
+
+            customer.ApplyDiscount("FIXED");
+            customer.ApplyDiscount("CATEGORYWISE");
+
+            var expected = 232.4;
             var actual = customer.GetFinalPriceAfterDiscount();
 
             Assert.Equal(expected, actual, 2);
