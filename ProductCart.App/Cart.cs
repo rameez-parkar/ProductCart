@@ -36,29 +36,7 @@ namespace ProductCart.App
             {
                 totalCartPrice += _cartProducts.ElementAt(i).CumulativeProductCost;
             }
-            /*foreach(string product in CartItems.Keys)
-            {
-                totalPrice += CartItems.GetValueOrDefault(product);
-            }*/
             return totalCartPrice;
         }
-
-        /*
-        //Calculates the discount amount on the total cost depending on Discount Percentage
-        public double GetTotalDiscount(double discountPercentage)
-        {
-            double totalPrice = GetTotalPrice();
-            double totalDiscount = (discountPercentage / 100) * totalPrice;
-            return totalDiscount;
-        }
-
-        //Calculates Final Amount to be paid after Discount
-        public double GetFinalDiscountedAmount(double discountPercentage)
-        {
-            double totalPrice = GetTotalPrice();
-            double totalDiscount = GetTotalDiscount(discountPercentage);
-            double finalAmount = totalPrice - totalDiscount;
-            return finalAmount;
-        }*/
     }
 }

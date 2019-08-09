@@ -15,7 +15,6 @@ namespace ProductCart.App
             this.CumulativeProductCost = this.GetCumulativeProductCost(this.Product, this.Quantity);
         }
 
-        //Calculates the total cost of a product based on its quantity, and returns boolean value depicting whether product is present or not.
         public double GetCumulativeProductCost(Product product, int quantity)
         {
             return (product.GetProductPrice() * quantity);
