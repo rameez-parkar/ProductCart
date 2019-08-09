@@ -2,7 +2,7 @@
 {
     public class Product
     {        
-        private string _productName;
+        public string _productName { get; private set; }
         private double _price;
         private Category _category;
 

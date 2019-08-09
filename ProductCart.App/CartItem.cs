@@ -15,7 +15,7 @@ namespace ProductCart.App
             this.CumulativeProductCost = this.GetCumulativeProductCost(this.Product, this.Quantity);
         }
 
-        public double GetCumulativeProductCost(Product product, int quantity)
+        private double GetCumulativeProductCost(Product product, int quantity)
         {
             return (product.GetProductPrice() * quantity);
         }

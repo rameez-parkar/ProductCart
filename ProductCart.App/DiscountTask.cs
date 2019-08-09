@@ -5,7 +5,6 @@ namespace ProductCart.App
     public class DiscountTask
     {
         private IDiscount _discountType;
-        private Cart _cart;
 
         public DiscountTask(IDiscount discountType)
         {
