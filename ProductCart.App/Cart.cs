@@ -1,43 +1,49 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace ProductCart.App
 {
-    public class Cart : ICart
+    public class Cart
     {
-        private CartItem _cartItem;
-        public Dictionary<string, double> CartItems= new Dictionary<string, double>();
-
-        public Cart()
+        private List<CartItem> _cartProducts = new List<CartItem>();
+        
+        public void AddNewProductToList(CartItem cartItem)
         {
-            _cartItem = new CartItem();
+            _cartProducts.Add(cartItem);
         }
 
-        //Adds product to cart, and accepts ProductName and quantity as parameters 
-        public string AddToCart(string productName, int quantity)
+        public bool CheckIfAlreadyInCart(Product product)
         {
-            bool isProductAvailable = _cartItem.CalculateProductTotalCost(productName, quantity);
-            if(isProductAvailable)
+            for (int i = 0; i < _cartProducts.Count; i++)
             {
-                CartItems.Add(productName, _cartItem.ProductTotalCost);
-                return $"{quantity} quantities of {productName} added to Cart.";
+                if (_cartProducts[i].Product == product)
+                {
+                    return true;
+                }
             }
-            else
-            {
-                return $"{productName} not available.";
-            }
+            return false;
         }
 
-        //Calculates the total cost of all products in the cart without discount
-        public double GetTotalPrice()
+        public List<CartItem> GetCartProductsList()
         {
-            double totalPrice = 0;
-            foreach(string product in CartItems.Keys)
+            return _cartProducts;
+        }
+
+        public double GetTotalCartPrice()
+        {
+            double totalCartPrice = 0;
+            for(int i=0; i<_cartProducts.Count; i++)
+            {
+                totalCartPrice += _cartProducts.ElementAt(i).CumulativeProductCost;
+            }
+            /*foreach(string product in CartItems.Keys)
             {
                 totalPrice += CartItems.GetValueOrDefault(product);
-            }
-            return totalPrice;
+            }*/
+            return totalCartPrice;
         }
 
+        /*
         //Calculates the discount amount on the total cost depending on Discount Percentage
         public double GetTotalDiscount(double discountPercentage)
         {
@@ -53,6 +59,6 @@ namespace ProductCart.App
             double totalDiscount = GetTotalDiscount(discountPercentage);
             double finalAmount = totalPrice - totalDiscount;
             return finalAmount;
-        }
+        }*/
     }
 }

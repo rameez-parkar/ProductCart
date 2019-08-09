@@ -4,30 +4,21 @@ namespace ProductCart.App
 {
     public class CartItem
     {
-        private Product _product;
-        private string _productName { get; set; }
-        private int _quantity;
-        public double ProductTotalCost = 0;
+        public Product Product;
+        public int Quantity;
+        public double CumulativeProductCost;
 
-        public CartItem()
+        public CartItem(Product product, int quantity)
         {
-            _product = new Product();
+            this.Product = product;
+            this.Quantity = quantity;
+            this.CumulativeProductCost = this.GetCumulativeProductCost(this.Product, this.Quantity);
         }
 
         //Calculates the total cost of a product based on its quantity, and returns boolean value depicting whether product is present or not.
-        public bool CalculateProductTotalCost(string productName, int quantity)
+        public double GetCumulativeProductCost(Product product, int quantity)
         {
-            _productName = productName;
-            _quantity = quantity;
-            if(_product.ProductPricesMapper.ContainsKey(_productName))
-            {
-                ProductTotalCost = _product.ProductPricesMapper.GetValueOrDefault(_productName) * quantity;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return (product.GetProductPrice() * quantity);
         }
     }
 }

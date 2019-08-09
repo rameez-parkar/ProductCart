@@ -1,15 +1,34 @@
-﻿using System.Collections.Generic;
-
-namespace ProductCart.App
+﻿namespace ProductCart.App
 {
     public class Product
-    {
-        //Products and their prices stored in the form of key-value pair
-        public Dictionary<string, double> ProductPricesMapper = new Dictionary<string, double>()
+    {        
+        private string _productName;
+        private double _price;
+        private Category _category;
+
+        public Product(string productName, double price, Category category)
         {
-            {"Milk", 22.00},
-            {"Bread", 35.00},
-            {"Cheese", 15.00}
-        };
+            this._productName = productName;
+            if (this._price >= 0)
+                this._price = price;
+            else
+                throw new NegativePriceException();
+            this._category = category;
+        }
+
+        public string GetProductName()
+        {
+            return this._productName;
+        }
+
+        public double GetProductPrice()
+        {
+            return this._price;
+        }
+
+        public Category GetProductCategory()
+        {
+            return this._category;
+        }
     }
 }
