@@ -4,7 +4,7 @@ namespace ProductCart.App
 {
     public class FixedDiscount : IDiscount
     {
-        private double discountPercentage = 20;
+        private readonly double discountPercentage = 20;
 
         public double ApplyDiscount(Cart cart)
         {

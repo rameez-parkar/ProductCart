@@ -4,20 +4,26 @@ namespace ProductCart.App
 {
     public class CartItem
     {
-        public Product Product;
-        public int Quantity;
-        public double CumulativeProductCost;
+        public Product Product { get; private set; }
+        public int Quantity { get; private set; }
+        public double CumulativeProductCost { get; private set; }
 
         public CartItem(Product product, int quantity)
         {
             this.Product = product;
             this.Quantity = quantity;
-            this.CumulativeProductCost = this.GetCumulativeProductCost(this.Product, this.Quantity);
+            this.CumulativeProductCost = this.SetCumulativeProductCost(this.Product, this.Quantity);
         }
 
-        private double GetCumulativeProductCost(Product product, int quantity)
+        public double SetCumulativeProductCost(Product product, int quantity)
         {
-            return (product.GetProductPrice() * quantity);
+            this.CumulativeProductCost = product.Price * quantity;
+            return this.CumulativeProductCost;
+        }
+
+        public void ChangeQuantity(int quantity)
+        {
+            this.Quantity += quantity;
         }
     }
 }

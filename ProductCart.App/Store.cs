@@ -8,7 +8,7 @@ namespace ProductCart.App
         
         public void AddProductToList(Product product)
         {
-            if (!(_productList.GetProductList().Contains(product)))
+            if (!(_productList.AvailableProductList.Contains(product)))
             {
                 _productList.AddProduct(product);
             }
@@ -16,7 +16,7 @@ namespace ProductCart.App
 
         public List<Product> ReadProductList()
         {
-            return _productList.GetProductList();
+            return _productList.AvailableProductList;
         }
     }
 }

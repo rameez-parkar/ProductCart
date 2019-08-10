@@ -19,8 +19,8 @@ namespace ProductCart.App
                 if (isAlreadyInCart)
                 {
                     ReadCartProductsList().Where(x => x.Product == product).ToList().ForEach(s => this._cartItem = s);
-                    this._cartItem.Quantity += quantity;
-                    this._cartItem.CumulativeProductCost = this._cartItem.Product.GetProductPrice() * this._cartItem.Quantity;
+                    this._cartItem.ChangeQuantity(quantity);
+                    this._cartItem.SetCumulativeProductCost(this._cartItem.Product , this._cartItem.Quantity);
                 }
                 else
                 {
@@ -32,7 +32,7 @@ namespace ProductCart.App
 
         public List<CartItem> ReadCartProductsList()
         {
-            return _cart.GetCartProductsList();
+            return _cart.CartProducts;
         }
 
         public double GetTotalPrice()
@@ -47,7 +47,7 @@ namespace ProductCart.App
 
         public double GetDiscountPrice()
         {
-            return _discount.GetDiscountAmount();
+            return _discount.DiscountedAmount;
         }
 
         public double GetFinalPriceAfterDiscount()

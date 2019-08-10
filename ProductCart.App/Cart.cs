@@ -5,18 +5,18 @@ namespace ProductCart.App
 {
     public class Cart
     {
-        private List<CartItem> _cartProducts = new List<CartItem>();
+        public List<CartItem> CartProducts { get; private set; } = new List<CartItem>();
         
         public void AddNewProductToList(CartItem cartItem)
         {
-            _cartProducts.Add(cartItem);
+            CartProducts.Add(cartItem);
         }
 
         public bool CheckIfAlreadyInCart(Product product)
         {
-            for (int i = 0; i < _cartProducts.Count; i++)
+            for (int i = 0; i < CartProducts.Count; i++)
             {
-                if (_cartProducts[i].Product == product)
+                if (CartProducts[i].Product == product)
                 {
                     return true;
                 }
@@ -24,17 +24,12 @@ namespace ProductCart.App
             return false;
         }
 
-        public List<CartItem> GetCartProductsList()
-        {
-            return _cartProducts;
-        }
-
         public double GetTotalCartPrice()
         {
             double totalCartPrice = 0;
-            for(int i=0; i<_cartProducts.Count; i++)
+            for(int i=0; i<CartProducts.Count; i++)
             {
-                totalCartPrice += _cartProducts.ElementAt(i).CumulativeProductCost;
+                totalCartPrice += CartProducts[i].CumulativeProductCost;
             }
             return totalCartPrice;
         }

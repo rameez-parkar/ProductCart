@@ -14,9 +14,9 @@ namespace ProductCart.App
         public double ApplyDiscount(Cart cart)
         {
             double discountedAmount = 0;
-            for(int i=0; i<cart.GetCartProductsList().Count; i++)
+            for(int i=0; i<cart.CartProducts.Count; i++)
             {
-                discountedAmount += (cart.GetCartProductsList()[i].CumulativeProductCost * (_categoryDiscountValues.GetValueOrDefault(cart.GetCartProductsList()[i].Product.GetProductCategory())/100));
+                discountedAmount += (cart.CartProducts[i].CumulativeProductCost * (_categoryDiscountValues.GetValueOrDefault(cart.CartProducts[i].Product.Category)/100));
             }
             return discountedAmount;
         }
